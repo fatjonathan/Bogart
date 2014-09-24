@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bogart</title>
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="apple-touch-icon" size="120x120" href="bogartfiles/icon.png"/>
+		<link rel="apple-touch-startup-image" href="bogartfiles/startup.png" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="120x120" href="bogartfiles/icon.png">
+        
+        <style type="text/css">
+            body {
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+                font-family: verdana, Geneva, sans-serif;
+                font-size: 10pt;
+				color: #176bed;
+            }
+            .winorlose {
+                font-size: 50pt;
+                color: #009856;
+            }
+            #container {
+                width: 320px;
+                height: 435px;
+            }
+            .lablebackground {
+                height: 20px;
+                width: 100%;
+                background-color: #176bed;
+            }
+            .lable {
+                display: block;
+                float: left;
+                height: 20px;
+                width: 33.33%;
+				background-color: #176bed;
+                vertical-align: top;
+                text-align: center;
+				color: white;
+            }
+            .scoreboard {
+                font-size: 10pt;
+            }
+            .score {
+                display: block;
+                float: left;
+                height: 40px;
+                width: 33.33%;
+                text-align: center;
+				font-size: 18pt;
+            }
+            #screen {
+                height: 275px;
+                margin: auto;
+                text-align: center;
+            }
+			button {
+                display: block;
+                float: left;
+				font-size: 10pt;
+				color: white;
+                outline: white;
+                border: 1px solid white;
+                align-self: center;
+			}
+            .control {
+                height: 85px;
+                width: 33.33%;
+            }
+			.reset {
+				height: 40px;
+				width: 320px;
+				margin-top: 4px;
+			}
+            strong {
+                color: #d23d20;
+        </style>
+        
+        <script type="text/javascript">
+						
+			var numGames, myScore, itsScore;
+            numGames = 0;
+            myScore = 0;
+            itsScore = 0;
+            
+            function smackTalk(x) {
+                var number = Math.floor(Math.random()*10+1)
+                if (x==="WIN") {
+                    if (number===1) {
+                        return "You got lucky.  Don't let it go to your head.";
+                    } else if (number===2) {
+                        return "This is really bad for my self-esteem.";
+                    } else if (number===3) {
+                        return "Wipe that smile off your face.  I'm just getting warmed up.";
+                    } else if (number===4) {
+                        return "I think you're cheating.  Let me see your hands.";
+					} else if (number===5) {
+						return "Oh man!  That was totally what I was going to pick, but I changed my mind.";
+					} else if (number===6) {
+						return "It's not fair.  You have more fingers than I do.";
+					} else if (number===7) {
+						return "My bad.  I butt-dialed that one.";
+					} else if (number===8) {
+						return "Ah! Stupid auto-correct messed me up that time.";
+					} else if (number===9) {
+						return "Dang it!  I hit the wrong button that time.";
+                    } else {
+                        return "Whatever, I let you win that one.";
+					}
+                } else if (x==="LOSE") {
+                    if (number===1) {
+                        return "For you, maybe this game should just be more like a hobby.";
+                    } else if (number===2) {
+                        return "You can't beat me.  I'm in your head.";
+                    } else if (number===3) {
+                        return "You should stick to flipping a coin.  I think three choices is a bit much for you.";
+                    } else if (number===4) {
+                        return "Weren't you the guy who was just talking about how SIRI was dumb?";
+                    } else if (number===5) {
+                        return "Am I going to fast for you?";
+					} else if (number===6) {
+						return "Come on, dude.  A Blackberry could play this game better than you.";
+					} else if (number===7) {
+						return "The way you play, it makes me think you're doing this while driving.";
+					} else if (number===8) {
+						return "Are you playing this game, or looking at Facebook?  I bet you thought you were clicking like.";
+					} else if (number===9) {
+						return "Are you this bad at texting too?";
+					} else {
+						return "Who's got two thumbs and sucks at rock, paper, scissors..?";
+					}
+                } else {
+                    return "Try again.";
+                }
+            }
+            
+            function itsChoice(){
+                var x = Math.floor(Math.random()*3+1);
+                if (x===1) {
+                    return "rock";
+                } else if (x===2) {
+                    return "paper";
+                } else {
+                    return "scissors";
+                }
+			}
+            
+			function myChoice(choice) {
+                var it, x;
+                it = itsChoice();
+                numGames += 1;
+                if (choice==="rock") {
+                    if (it==="scissors") {
+                        x = "WIN";
+                        myScore += 1;
+                    } else if (it==="paper") {
+                        x = "LOSE";
+                        itsScore += 1;
+                    } else {
+                        x = "Tie";
+                    }
+                } else if (choice==="paper") {
+                    if (it==="rock") {
+                        x = "WIN";
+                        myScore += 1;
+                    } else if (it==="scissors") {
+                        x = "LOSE";
+                        itsScore += 1;
+                    } else {
+                        x = "Tie";
+                    }
+                } else {
+                    if (it==="paper") {
+                        x = "WIN";
+                        myScore += 1;
+                    } else if (it==="rock") {
+                        x = "LOSE";
+                        itsScore += 1;
+                    } else {
+                        x = "Tie";
+                    }
+                }
+                document.getElementById("screen").innerHTML = "You chose <strong>" + choice + "</strong>, I chose <strong>" + it + "</strong><br><br><br><span class='winorlose'>" + x + "</span><br><br>" + smackTalk(x);
+                document.getElementById("myScore").innerHTML = myScore;
+                document.getElementById("itsScore").innerHTML = itsScore;
+                document.getElementById("numGames").innerHTML = numGames;
+            }
+        
+        </script>
+        
+    </head>
+    <body>
+        <div id="container">
+            <div class="lablebackground">
+            <div class="lable"><span class="scoreboard">Your Score</span></div>
+            <div class="lable"><span class="scoreboard">Total Games</span></div>
+            <div class="lable"><span class="scoreboard">My Score</span></div>
+            </div>
+            <br>
+            <div class="score" id="myScore"></div>
+            <div class="score" id="numGames"></div>
+            <div class="score" id="itsScore"></div>
+            <br>
+            <div id="screen"></div>
+        <form>
+            <button class="control" value="rock" onClick="myChoice('rock'); return false;" style="background: #d23d20;">Rock</button>
+            <button class="control" value="paper" onClick="myChoice('paper'); return false;" style="background: #ffb402;">Paper</button>
+            <button class="control" value="scissors" onClick="myChoice('scissors'); return false;" style="background: #009856;">Scissors</button>
+            <br>
+            <button class="reset" value="reset" style="background: #176bed;">Clear</button>
+        </form>
+        </div>
+    </body>
+</html>
