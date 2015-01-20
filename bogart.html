@@ -24,8 +24,8 @@
                 color: #009856;
             }
             #container {
-                width: 320px;
-                height: 435px;
+                width: 100%;
+                height: 100%;
             }
             .lablebackground {
                 height: 20px;
@@ -54,7 +54,7 @@
 				font-size: 18pt;
             }
             #screen {
-                height: 275px;
+                height: 100%;
                 margin: auto;
                 text-align: center;
             }
@@ -67,13 +67,19 @@
                 border: 1px solid white;
                 align-self: center;
 			}
+            #form {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+            }
             .control {
+                display: inline-block;
                 height: 85px;
                 width: 33.33%;
             }
 			.reset {
 				height: 40px;
-				width: 320px;
+				width: 100%;
 				margin-top: 4px;
 			}
             strong {
@@ -206,7 +212,7 @@
             <div class="score" id="itsScore"></div>
             <br>
             <div id="screen"></div>
-        <form>
+        <form id="form">
             <button class="control" value="rock" onClick="myChoice('rock'); return false;" style="background: #d23d20;">Rock</button>
             <button class="control" value="paper" onClick="myChoice('paper'); return false;" style="background: #ffb402;">Paper</button>
             <button class="control" value="scissors" onClick="myChoice('scissors'); return false;" style="background: #009856;">Scissors</button>
